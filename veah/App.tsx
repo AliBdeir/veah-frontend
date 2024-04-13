@@ -1,13 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import Main from "./screens/ main";
 
 export default function App() {
   return (
-    <View className="flex-1 bg-black justify-center items-center">
-      <Text className="text-white">
-        Open uppp.tsx to start aaaaaaaa on your app!
-      </Text>
+    <SafeAreaView className="flex-1 bg-black border-2 border-red-500">
       <StatusBar style="auto" />
-    </View>
+      <Main />
+    </SafeAreaView>
   );
 }
