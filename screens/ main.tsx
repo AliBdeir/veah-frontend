@@ -1,19 +1,16 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import { useState, useEffect } from "react";
-import { Button, ButtonText, ButtonIcon, ButtonSpinner, ButtonGroup } from "@gluestack-ui/themed";
-import QuickOptions from "../components/quick-options";
+import { Button, ButtonText } from "@gluestack-ui/themed";
+import { useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import Profile from "../components/profile";
-import useLoadFromStorage from "../hooks/useLoadFromStorage";
+import QuickOptions from "../components/quick-options";
+import usePersistedState from "../hooks/state";
 const profileCog = require("../assets/cog.png");
 const cancel = require("../assets/cancel.png");
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
-  // const { newData, form } = useLoadFromStorage();
-  // useEffect(() => {
-  //   console.log("load called");
-  //   console.log("new fetched as: ", newData);
-  // }, [newData, showProfile]);
+  const newData = usePersistedState((state) => state.state);
+  console.log("My data is", newData);
   return (
     <View className="flex-1">
       {/* header */}

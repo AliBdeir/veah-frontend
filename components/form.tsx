@@ -2,27 +2,25 @@ import { Button, ButtonText, Divider } from "@gluestack-ui/themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FormProvider, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
-import { UserInput } from "../types/types";
+import { DefaultUserInput, UserInput } from "../types/types";
 import { useEffect } from "react";
 import AddressForm from "./address/address-form";
 import BasicInformationForm from "./basic-information/basic-information-form";
 import HealthInformationForm from "./health-information/health-information-form";
-import useLoadFromStorage from "../hooks/useLoadFromStorage";
+import usePersistedState from "../hooks/state";
 
 export default function Form() {
-  // const form = useForm<UserInput>();
-  const { newData, form } = useLoadFromStorage();
+  const { setState, state } = usePersistedState();
+  const form = useForm<UserInput>({
+    defaultValues: DefaultUserInput,
+  });
   useEffect(() => {
-    console.log("load called");
-    console.log("new fetched as: ", newData);
-  }, [newData]);
-  const onSubmit = async (data: UserInput) => {
-    try {
-      await AsyncStorage.setItem("formData", JSON.stringify(data));
-      console.log("Data saved:", data);
-    } catch (error) {
-      console.error("Error saving data", error);
+    if (state) {
+      form.reset(state);
     }
+  }, [state]);
+  const onSubmit = async (data: UserInput) => {
+    setState(data);
   };
   return (
     <FormProvider {...form}>

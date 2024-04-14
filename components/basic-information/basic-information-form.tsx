@@ -28,7 +28,6 @@ const BasicInformationForm = () => {
             <InputField
               value={field.value}
               onChangeText={(text) => {
-                console.log(text);
                 field.onChange(text);
               }}
               placeholder="Name"
@@ -46,7 +45,6 @@ const BasicInformationForm = () => {
                 keyboardType="numeric"
                 value={field.value?.toString()}
                 onChangeText={(text) => {
-                  console.log(text);
                   field.onChange(isNaN(parseInt(text)) ? "" : parseInt(text));
                 }}
                 placeholder="Age"
@@ -60,7 +58,6 @@ const BasicInformationForm = () => {
           render={({ field }) => (
             <RadioGroup
               onChange={(val) => {
-                console.log(val);
                 field.onChange(val);
               }}
               value={field.value}

@@ -20,7 +20,6 @@ export default function AddressForm() {
               <InputField
                 value={field.value}
                 onChangeText={(text) => {
-                  console.log(text);
                   field.onChange(text);
                 }}
                 placeholder="Address"
@@ -37,7 +36,6 @@ export default function AddressForm() {
               <InputField
                 value={field.value}
                 onChangeText={(text) => {
-                  console.log(text);
                   field.onChange(text);
                 }}
                 placeholder="Suite/Apt./Dept."
@@ -54,7 +52,6 @@ export default function AddressForm() {
               <InputField
                 value={field.value}
                 onChangeText={(text) => {
-                  console.log(text);
                   field.onChange(text);
                 }}
                 placeholder="City"
@@ -79,7 +76,6 @@ export default function AddressForm() {
                   keyboardType="numeric"
                   value={field.value}
                   onChangeText={(text) => {
-                    console.log(text);
                     field.onChange(text);
                   }}
                   placeholder="Zip"
