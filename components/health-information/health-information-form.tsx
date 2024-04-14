@@ -6,9 +6,17 @@ import BloodTypeComponent from "./blood-type";
 
 const HealthInformationForm = () => {
   const form = useFormContext<UserInput>();
-  const { fields, append, update, remove } = useFieldArray<UserInput>({
+  const conditionsArray = useFieldArray<UserInput>({
     control: form.control,
     name: "healthInformation.conditions",
+  });
+  const medicationsArray = useFieldArray<UserInput>({
+    control: form.control,
+    name: "healthInformation.medications",
+  });
+  const allergiesArray = useFieldArray<UserInput>({
+    control: form.control,
+    name: "healthInformation.allergies",
   });
   return (
     <View className="flex flex-col">
@@ -22,20 +30,58 @@ const HealthInformationForm = () => {
         <FormControl>
           <Heading>Conditions</Heading>
           <MultiItemInput
-            values={fields.map((x) => (x as Item).value)}
+            values={conditionsArray.fields.map((x) => (x as Item).value)}
             onValueUpdate={(index, value) =>
-              update(index, {
+              conditionsArray.update(index, {
                 id: index.toString(),
                 value: value,
               })
             }
             onValueAdd={(value) =>
-              append({
-                id: fields.length.toString(),
+              conditionsArray.append({
+                id: conditionsArray.fields.length.toString(),
                 value: value,
               })
             }
-            onValueRemove={(index) => remove(index)}
+            onValueRemove={(index) => conditionsArray.remove(index)}
+          />
+        </FormControl>
+        <FormControl>
+          <Heading>Medication</Heading>
+          <MultiItemInput
+            values={medicationsArray.fields.map((x) => (x as Item).value)}
+            onValueUpdate={(index, value) =>
+              medicationsArray.update(index, {
+                id: index.toString(),
+                value: value,
+              })
+            }
+            onValueAdd={(value) =>
+              medicationsArray.append({
+                id: medicationsArray.fields.length.toString(),
+                value: value,
+              })
+            }
+            onValueRemove={(index) => medicationsArray.remove(index)}
+          />
+        </FormControl>
+        <FormControl>
+          <Heading>Allergies</Heading>
+          <MultiItemInput
+            values={allergiesArray.fields.map((x) => (x as Item).value)}
+            onValueUpdate={(index, value) =>
+              allergiesArray.update(index, {
+                id: index.toString(),
+                value: value,
+              })
+            }
+            onValueAdd={(value) =>
+              allergiesArray.append({
+                id: allergiesArray.fields.length.toString(),
+                value: value,
+              })
+            }
+            onValueRemove={(index) => allergiesArray.remove(index)}
           />
         </FormControl>
       </FormControl>
