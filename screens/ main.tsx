@@ -4,7 +4,9 @@ import { Image, Text, TouchableOpacity, View, ScrollView } from "react-native";
 import Profile from "../components/profile";
 import QuickOptions from "../components/quick-options";
 import usePersistedState from "../hooks/state";
+// @ts-expect-error png stuff
 import profileCog from "../assets/cog.png";
+// @ts-expect-error png stuff
 import cancel from "../assets/cancel.png";
 import useCall from "../hooks/use-call";
 import clsx from "clsx";
@@ -12,11 +14,11 @@ import clsx from "clsx";
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
   const [otherText, setOtherText] = useState("");
-  const newData = usePersistedState((state) => state.state);
-  const call = useCall();
+  const { state, success, setSuccess } = usePersistedState((state) => state);
+  const call = useCall(() => setSuccess(true));
   const onSos = () => {
     call.mutate({
-      ...newData,
+      ...state,
       emergencyInformation: otherText ? otherText : "No emergency information provided. General emergency.",
     });
   };
@@ -40,10 +42,7 @@ export default function Main() {
             <View className="h-64 w-full justify-center items-center mt-3">
               {/* SOS button */}
               <TouchableOpacity
-                className={clsx(
-                  `h-40 w-40 rounded-full justify-center items-center`,
-                  call.isPending || call.isSuccess ? "bg-green-700" : "bg-red-500"
-                )}
+                className={clsx(`h-40 w-40 rounded-full justify-center items-center`, success ? "bg-green-700" : "bg-red-500")}
                 onPress={onSos}
               >
                 <Text className="text-white text-4xl font-bold">SOS</Text>

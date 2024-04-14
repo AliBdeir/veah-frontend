@@ -5,14 +5,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type State = {
   state: UserInput;
+  success: boolean;
   setState: (state: UserInput) => void;
+  setSuccess: (success: boolean) => void;
 };
 
 const usePersistedState = create<State>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       state: DefaultUserInput,
-      setState: (state: UserInput) => set({ state }),
+      success: false,
+      setState: (state: UserInput) => set({ success: get().success, state }),
+      setSuccess: (success: boolean) => set({ success, state: get().state }),
     }),
     {
       name: "user-input",
