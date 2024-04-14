@@ -1,9 +1,10 @@
 import { View } from "react-native";
 import { useState } from "react";
 import QuickButton from "./quick-button";
-import { ButtonItem } from "../types";
+import useCall from "../hooks/use-call";
+import usePersistedState from "../hooks/state";
 
-export const dataList: ButtonItem[] = [
+export const dataList = [
   {
     btn_id: "medical",
     label: "MEDICAL",
@@ -31,8 +32,10 @@ export const dataList: ButtonItem[] = [
   // ... add more buttons as needed
 ];
 
-export default function QuickOptions({ options }: { options: [] }) {
-  const [buttonList, setButtonList] = useState<ButtonItem[]>(dataList);
+export default function QuickOptions() {
+  const [buttonList] = useState(dataList);
+  const call = useCall();
+  const currentUserInput = usePersistedState((state) => state.state);
   return (
     <View className="flex-row flex-wrap justify-around my-4 px-2">
       {/* All the quick options here */}
@@ -43,6 +46,12 @@ export default function QuickOptions({ options }: { options: [] }) {
           label={button.label}
           emoji={button.emoji}
           colour={button.colour}
+          onPress={() =>
+            call.mutate({
+              ...currentUserInput,
+              emergencyInformation: button.label,
+            })
+          }
         />
       ))}
     </View>

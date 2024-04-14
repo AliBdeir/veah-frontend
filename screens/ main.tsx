@@ -4,13 +4,12 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import Profile from "../components/profile";
 import QuickOptions from "../components/quick-options";
 import usePersistedState from "../hooks/state";
-const profileCog = require("../assets/cog.png");
-const cancel = require("../assets/cancel.png");
+import profileCog from "../assets/cog.png";
+import cancel from "../assets/cancel.png";
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
   const newData = usePersistedState((state) => state.state);
-  console.log("My data is", newData);
   return (
     <View className="flex-1">
       {/* header */}
@@ -41,7 +40,7 @@ export default function Main() {
             </View>
 
             {/* Options container */}
-            <QuickOptions options={[]} />
+            <QuickOptions />
 
             {/* Additional options container */}
             <View className="my-4 mx-3">
