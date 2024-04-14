@@ -21,8 +21,7 @@ const BasicInformationForm = () => {
     <FormControl style={{ gap: 14, marginBottom: 14 }}>
       <Heading>Basic Info</Heading>
       <Controller
-        defaultValue=""
-        name="basic.name"
+        name="name"
         control={control}
         render={({ field }) => (
           <Input variant="outline">
@@ -39,17 +38,16 @@ const BasicInformationForm = () => {
       />
       <FormControl style={{ flexDirection: "row", gap: 8 }}>
         <Controller
-          defaultValue=""
-          name="basic.age"
+          name="age"
           control={control}
           render={({ field }) => (
             <Input variant="outline" style={{ width: "50%" }}>
               <InputField
                 keyboardType="numeric"
-                value={field.value}
+                value={field.value.toString()}
                 onChangeText={(text) => {
                   console.log(text);
-                  field.onChange(text);
+                  field.onChange(isNaN(parseInt(text)) ? "" : parseInt(text));
                 }}
                 placeholder="Age"
               />
@@ -57,8 +55,7 @@ const BasicInformationForm = () => {
           )}
         />
         <Controller
-          defaultValue=""
-          name="basic.sex"
+          name="sex"
           control={control}
           render={({ field }) => (
             <RadioGroup
@@ -66,6 +63,7 @@ const BasicInformationForm = () => {
                 console.log(val);
                 field.onChange(val);
               }}
+              value={field.value}
             >
               <VStack space="sm">
                 <Radio value="Male">
@@ -79,12 +77,6 @@ const BasicInformationForm = () => {
                     <RadioIcon as={CircleIcon} />
                   </RadioIndicator>
                   <RadioLabel>Female</RadioLabel>
-                </Radio>
-                <Radio value="Other">
-                  <RadioIndicator mr="$2">
-                    <RadioIcon as={CircleIcon} />
-                  </RadioIndicator>
-                  <RadioLabel>Other</RadioLabel>
                 </Radio>
               </VStack>
             </RadioGroup>
