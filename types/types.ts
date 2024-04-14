@@ -28,9 +28,35 @@ export type EmergencyContact = {
   relationship: string;
 }; // Health types
 
+export type Item = {
+  id: string;
+  value: string;
+};
+
 export type HealthInformation = {
   bloodType: string;
-  allergies: string[];
-  medications: string[];
-  conditions: string[];
+  allergies: Item[];
+  medications: Item[];
+  conditions: Item[];
+};
+
+export const DefaultUserInput: UserInput = {
+  address: {
+    addressLn1: "",
+    addressLn2: "",
+    city: "",
+    state: "",
+    zip: "",
+  },
+  emergencyInformation: "",
+  age: 0,
+  emergencyContacts: [],
+  healthInformation: {
+    bloodType: "",
+    allergies: [],
+    medications: [],
+    conditions: [],
+  },
+  name: "",
+  sex: "Male",
 };

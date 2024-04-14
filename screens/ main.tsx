@@ -1,12 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useState, useEffect } from "react";
-import {
-  Button,
-  ButtonText,
-  ButtonIcon,
-  ButtonSpinner,
-  ButtonGroup,
-} from "@gluestack-ui/themed";
+import { Button, ButtonText, ButtonIcon, ButtonSpinner, ButtonGroup } from "@gluestack-ui/themed";
 import QuickOptions from "../components/quick-options";
 import Profile from "../components/profile";
 import useLoadFromStorage from "../hooks/useLoadFromStorage";
@@ -24,21 +18,12 @@ export default function Main() {
     <View className="flex-1">
       {/* header */}
       <View className="flex flex-row justify-between items-center px-6">
-        <Text className="text-white text-4xl font-bold">
-          {showProfile ? "Profile" : ""}
-        </Text>
+        <Text className="text-white text-4xl font-bold">{showProfile ? "Profile" : ""}</Text>
 
-        <TouchableOpacity
-          onPress={() => setShowProfile(!showProfile)}
-          className=" p-2 rounded"
-        >
+        <TouchableOpacity onPress={() => setShowProfile(!showProfile)} className=" p-2 rounded">
           {/* <Text className="text-white text-lg">Profile</Text> */}
 
-          <Image
-            resizeMode="contain"
-            style={{ height: 50, width: 50 }}
-            source={showProfile ? cancel : profileCog}
-          />
+          <Image resizeMode="contain" style={{ height: 50, width: 50 }} source={showProfile ? cancel : profileCog} />
         </TouchableOpacity>
       </View>
       {/* Stuff below header */}
@@ -64,9 +49,7 @@ export default function Main() {
             {/* Additional options container */}
             <View className="my-4 mx-3">
               <Text className="text-white mb-2">Other</Text>
-              <View className="border-2 border-white p-3">
-                {/* Placeholder for additional options */}
-              </View>
+              <View className="border-2 border-white p-3">{/* Placeholder for additional options */}</View>
             </View>
 
             {/* Call to action button container */}
