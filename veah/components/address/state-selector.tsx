@@ -1,12 +1,5 @@
-import {
-  Select,
-  SelectTrigger,
-  SelectInput,
-  SelectPortal,
-  SelectBackdrop,
-  SelectContent,
-  SelectItem,
-} from "@gluestack-ui/themed";
+import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, SelectContent, SelectItem } from "@gluestack-ui/themed";
+import { states } from "./states";
 
 type Props = {
   value: string;
@@ -22,12 +15,13 @@ const StateSelectorComponent = (props: Props) => {
       <SelectPortal>
         <SelectBackdrop />
         <SelectContent>
-          <SelectItem label="India" value="India" />
-          <SelectItem label="Sri Lanka" value="Sri Lanka" />
-          <SelectItem label="Uganda" value="Uganda" />
-          <SelectItem label="Japan" value="Japan" />
+          {states.map((state) => (
+            <SelectItem key={state} value={state} label={state} />
+          ))}
         </SelectContent>
       </SelectPortal>
     </Select>
   );
 };
+
+export default StateSelectorComponent;

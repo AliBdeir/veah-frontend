@@ -16,6 +16,7 @@ import {
 } from "@gluestack-ui/themed";
 import { Controller, useFormContext } from "react-hook-form";
 import { UserInput } from "../../types/types";
+import StateSelectorComponent from "./state-selector";
 
 export default function AddressForm() {
   const { control } = useFormContext<UserInput>();
@@ -26,6 +27,7 @@ export default function AddressForm() {
           <FormControlLabelText>Address 1</FormControlLabelText>
         </FormControlLabel>
         <Controller
+          defaultValue=""
           name="address.addressLn1"
           control={control}
           render={({ field }) => (
@@ -44,6 +46,7 @@ export default function AddressForm() {
           <FormControlLabelText>Address 2</FormControlLabelText>
         </FormControlLabel>
         <Controller
+          defaultValue=""
           name="address.addressLn2"
           control={control}
           render={({ field }) => (
@@ -62,17 +65,17 @@ export default function AddressForm() {
           <FormControlLabelText>State</FormControlLabelText>
         </FormControlLabel>
         <Controller
+          defaultValue=""
           control={control}
           name="address.state"
-          render={({ field }) => (
-            
-          )}
+          render={({ field }) => <StateSelectorComponent value={field.value} onChange={field.onChange} />}
         />
         <FormControlLabel>
           <FormControlLabelText>Zip</FormControlLabelText>
         </FormControlLabel>
 
         <Controller
+          defaultValue=""
           name="address.zip"
           control={control}
           render={({ field }) => (

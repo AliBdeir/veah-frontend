@@ -8,7 +8,7 @@ import { config } from "@gluestack-ui/config";
 
 export default function App() {
   return (
-    <GluestackUIProvider config={config}>
+    <GluestackUIProvider config={config} colorMode="dark">
       <SafeAreaProvider>
         <SafeAreaView
           edges={["top", "left", "right"]}
