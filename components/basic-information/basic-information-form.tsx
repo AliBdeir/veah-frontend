@@ -44,7 +44,7 @@ const BasicInformationForm = () => {
             <Input variant="outline" style={{ width: "50%" }}>
               <InputField
                 keyboardType="numeric"
-                value={field.value.toString()}
+                value={field.value?.toString()}
                 onChangeText={(text) => {
                   console.log(text);
                   field.onChange(isNaN(parseInt(text)) ? "" : parseInt(text));

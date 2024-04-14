@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm } from "react-hook-form";
-import { UserInput } from "../types/types";
+import { DefaultUserInput, UserInput } from "../types/types";
 
 // Custom hook to load form data
 export default function useLoadFromStorage() {
   const [newData, setNewData] = useState<UserInput | null>(null);
-  const form = useForm<UserInput>();
+  const form = useForm<UserInput>({
+    defaultValues: DefaultUserInput,
+  });
 
   useEffect(() => {
     const loadFormData = async () => {
