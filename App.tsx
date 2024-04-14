@@ -24,8 +24,6 @@ export default function App() {
             style={{
               flex: 1,
               backgroundColor: "black",
-              borderWidth: 2,
-              borderColor: "red",
             }}
           >
             <StatusBar style="auto" />
