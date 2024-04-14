@@ -15,11 +15,11 @@ const cancel = require("../assets/cancel.png");
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
-  const { newData, form } = useLoadFromStorage();
-  useEffect(() => {
-    console.log("load called");
-    console.log("new fetched as: ", newData);
-  }, [newData, showProfile]);
+  // const { newData, form } = useLoadFromStorage();
+  // useEffect(() => {
+  //   console.log("load called");
+  //   console.log("new fetched as: ", newData);
+  // }, [newData, showProfile]);
   return (
     <View className="flex-1">
       {/* header */}
