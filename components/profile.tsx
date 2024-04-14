@@ -25,7 +25,7 @@ export default function Profile() {
   return (
     <View className="flex-1 ">
       {/* Title */}
-      <View className="flex flex-row justify-between items-center px-4">
+      {/* <View className="flex flex-row justify-between items-center px-4">
         <Text className="text-white text-4xl font-bold">Profile</Text>
         <TouchableOpacity
           className="p-4 items-center justify-center bg-transparent"
@@ -41,7 +41,7 @@ export default function Profile() {
             X
           </Animated.Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <Form />
     </View>
   );

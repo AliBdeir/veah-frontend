@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useState } from "react";
 import {
   Button,
@@ -9,18 +9,30 @@ import {
 } from "@gluestack-ui/themed";
 import QuickOptions from "../components/quick-options";
 import Profile from "../components/profile";
+const profileCog = require("../assets/cog.png");
+const cancel = require("../assets/cancel.png");
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
   return (
     <View className="flex-1">
       {/* header */}
-      <View className="flex flex-row justify-end px-4">
+      <View className="flex flex-row justify-between items-center px-6">
+        <Text className="text-white text-4xl font-bold">
+          {showProfile ? "Profile" : ""}
+        </Text>
+
         <TouchableOpacity
           onPress={() => setShowProfile(!showProfile)}
-          className="bg-blue-500 p-2 rounded"
+          className=" p-2 rounded"
         >
-          <Text className="text-white text-lg">Profile</Text>
+          {/* <Text className="text-white text-lg">Profile</Text> */}
+
+          <Image
+            resizeMode="contain"
+            style={{ height: 50, width: 50 }}
+            source={showProfile ? cancel : profileCog}
+          />
         </TouchableOpacity>
       </View>
       {/* Stuff below header */}
