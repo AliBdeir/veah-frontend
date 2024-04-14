@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
 import Main from "./screens/ main";
 import { GluestackUIProvider, Box } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
@@ -7,10 +9,20 @@ import { config } from "@gluestack-ui/config";
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
-      <SafeAreaView className="flex-1 bg-black border-2 border-red-500">
-        <StatusBar style="auto" />
-        <Main />
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <SafeAreaView
+          edges={["top", "left", "right"]}
+          style={{
+            flex: 1,
+            backgroundColor: "black",
+            borderWidth: 2,
+            borderColor: "red",
+          }}
+        >
+          <StatusBar style="auto" />
+          <Main />
+        </SafeAreaView>
+      </SafeAreaProvider>
     </GluestackUIProvider>
   );
 }

@@ -6,7 +6,13 @@ export type ButtonItem = {
 };
 
 export type UserInput = {
-  address: string;
+  address: {
+    addressLn1: string;
+    addressLn2: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
   emergencyInformation: string;
   emergencyContacts: EmergencyContact[];
   healthInformation: HealthInformation;
