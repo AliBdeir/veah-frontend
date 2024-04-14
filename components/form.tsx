@@ -4,11 +4,17 @@ import { View } from "react-native";
 import { UserInput } from "../types/types";
 import AddressForm from "./address/address-form";
 import BasicInformationForm from "./basic-information/basic-information-form";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Form() {
   const form = useForm<UserInput>();
-  const onSubmit = (data: UserInput) => {
-    console.log(data);
+  const onSubmit = async (data: UserInput) => {
+    try {
+      await AsyncStorage.setItem("formData", JSON.stringify(data));
+      console.log("Data saved:", data);
+    } catch (error) {
+      console.error("Error saving data", error);
+    }
   };
   return (
     <FormProvider {...form}>
