@@ -16,6 +16,9 @@ export type UserInput = {
   emergencyInformation: string;
   emergencyContacts: EmergencyContact[];
   healthInformation: HealthInformation;
+  age: number;
+  name: string;
+  sex: string;
 };
 
 export type EmergencyContact = {
