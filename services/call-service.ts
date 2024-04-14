@@ -24,13 +24,11 @@ class CallServiceClass {
         conditions: input.healthInformation.conditions.map((condition) => condition.value),
       },
     };
-    return await axios
-      .post(`${this.baseUrl}/call`, {
+    return (
+      await axios.post<{ sessionId: string }>(`${this.baseUrl}/call`, {
         predefinedInformation: callInput,
       })
-      .then((res) => {
-        console.log(res.data);
-      });
+    ).data;
   };
 }
 

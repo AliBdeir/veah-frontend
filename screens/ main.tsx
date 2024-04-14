@@ -10,12 +10,14 @@ import profileCog from "../assets/cog.png";
 import cancel from "../assets/cancel.png";
 import useCall from "../hooks/use-call";
 import clsx from "clsx";
+import { useChatSession } from "../hooks/chat";
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
   const [otherText, setOtherText] = useState("");
-  const { state, success, setSuccess } = usePersistedState((state) => state);
+  const { state, success, setSuccess, session } = usePersistedState();
   const call = useCall(() => setSuccess(true));
+  useChatSession();
   const onSos = () => {
     call.mutate({
       ...state,
@@ -42,10 +44,13 @@ export default function Main() {
             <View className="h-64 w-full justify-center items-center mt-3">
               {/* SOS button */}
               <TouchableOpacity
-                className={clsx(`h-40 w-40 rounded-full justify-center items-center`, success ? "bg-green-700" : "bg-red-500")}
+                className={clsx(
+                  `h-40 w-40 rounded-full justify-center items-center`,
+                  session?.sent ? "bg-blue-900" : success ? "bg-green-700" : "bg-red-500"
+                )}
                 onPress={onSos}
               >
-                <Text className="text-white text-4xl font-bold">SOS</Text>
+                <Text className="text-white text-4xl font-bold">{session?.sent ? "HELP IS COMING" : success ? "On the call..." : "SOS"}</Text>
               </TouchableOpacity>
             </View>
 
