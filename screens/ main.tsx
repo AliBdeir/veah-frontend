@@ -11,6 +11,7 @@ import cancel from "../assets/cancel.png";
 import useCall from "../hooks/use-call";
 import clsx from "clsx";
 import { useChatSession } from "../hooks/chat";
+import ChatComponent from "../components/chat-component/chat-component";
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
@@ -49,29 +50,36 @@ export default function Main() {
                   session?.sent ? "bg-blue-900" : success ? "bg-green-700" : "bg-red-500"
                 )}
                 onPress={onSos}
+                disabled={(session?.id || success) === true}
               >
                 <Text className="text-white text-4xl font-bold">{session?.sent ? "HELP IS COMING" : success ? "On the call..." : "SOS"}</Text>
               </TouchableOpacity>
             </View>
 
-            {/* Options container */}
-            <QuickOptions />
+            {!session?.id ? (
+              <>
+                {/* Options container */}
+                <QuickOptions />
 
-            {/* Additional options container */}
-            <View className="my-4 mx-3">
-              <Text className="text-white mb-2">Other</Text>
-              <Input>
-                <InputField placeholder="Type emergency..." value={otherText} onChangeText={(text) => setOtherText(text)} />
-              </Input>
-            </View>
+                {/* Additional options container */}
+                <View className="my-4 mx-3">
+                  <Text className="text-white mb-2">Other</Text>
+                  <Input>
+                    <InputField placeholder="Type emergency..." value={otherText} onChangeText={(text) => setOtherText(text)} />
+                  </Input>
+                </View>
 
-            {/* Call to action button container */}
-            <View className="my-4 mx-3">
-              <Button className="bg-purple-600" onPress={onSos}>
-                {/* Replace with an actual ButtonIcon or ButtonSpinner if needed */}
-                <ButtonText className="text-white">MAKE THE CALL</ButtonText>
-              </Button>
-            </View>
+                {/* Call to action button container */}
+                <View className="my-4 mx-3">
+                  <Button className="bg-purple-600" onPress={onSos}>
+                    {/* Replace with an actual ButtonIcon or ButtonSpinner if needed */}
+                    <ButtonText className="text-white">MAKE THE CALL</ButtonText>
+                  </Button>
+                </View>
+              </>
+            ) : (
+              <ChatComponent />
+            )}
           </>
         ) : (
           <Profile />
