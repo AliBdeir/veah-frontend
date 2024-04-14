@@ -1,6 +1,20 @@
-import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, SelectContent, SelectItem } from "@gluestack-ui/themed";
+import {
+  Select,
+  SelectTrigger,
+  SelectInput,
+  SelectPortal,
+  SelectBackdrop,
+  SelectContent,
+  SelectItem,
+  ChevronDownIcon,
+  Icon,
+  SelectDragIndicator,
+  SelectDragIndicatorWrapper,
+  SelectIcon,
+} from "@gluestack-ui/themed";
 import { states } from "./states";
-import { StyleProp } from "react-native";
+import { ScrollView, StyleProp, ViewStyle } from "react-native";
+import React from "react";
 
 type Props = {
   value: string;
@@ -11,7 +25,7 @@ type Props = {
 const StateSelectorComponent = (props: Props) => {
   return (
     <Select onValueChange={props.onChange} selectedValue={props.value} style={props.style}>
-      <SelectTrigger>
+      {/* <SelectTrigger>
         <SelectInput placeholder="State" />
       </SelectTrigger>
       <SelectPortal>
@@ -20,6 +34,23 @@ const StateSelectorComponent = (props: Props) => {
           {states.map((state) => (
             <SelectItem key={state} value={state} label={state} />
           ))}
+        </SelectContent>
+      </SelectPortal> */}
+      <SelectTrigger variant="outline" size="md">
+        <SelectInput placeholder="State" />
+        <SelectIcon mr="$3" as={ChevronDownIcon} />
+      </SelectTrigger>
+      <SelectPortal>
+        <SelectBackdrop />
+        <SelectContent>
+          <ScrollView>
+            <SelectDragIndicatorWrapper>
+              <SelectDragIndicator />
+            </SelectDragIndicatorWrapper>
+            {states.map((state) => (
+              <SelectItem key={state} value={state} label={state} />
+            ))}
+          </ScrollView>
         </SelectContent>
       </SelectPortal>
     </Select>

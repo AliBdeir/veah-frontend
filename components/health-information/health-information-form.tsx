@@ -25,7 +25,14 @@ const HealthInformationForm = () => {
         <Controller
           control={form.control}
           name="healthInformation.bloodType"
-          render={({ field }) => <BloodTypeComponent value={field.value} onChange={field.onChange} />}
+          render={({ field }) => (
+            <BloodTypeComponent
+              value={field.value}
+              onChange={(value) => {
+                field.onChange(value);
+              }}
+            />
+          )}
         />
         <FormControl>
           <Heading>Conditions</Heading>
