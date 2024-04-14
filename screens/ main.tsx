@@ -31,7 +31,7 @@ export default function Main() {
         <TouchableOpacity onPress={() => setShowProfile(!showProfile)} className=" p-2 rounded">
           {/* <Text className="text-white text-lg">Profile</Text> */}
 
-          <Image resizeMode="contain" style={{ height: 50, width: 50 }} source={showProfile ? cancel : profileCog} />
+          <Image resizeMode="contain" style={{ height: 35, width: 35 }} source={showProfile ? cancel : profileCog} />
         </TouchableOpacity>
       </View>
       {/* Stuff below header */}

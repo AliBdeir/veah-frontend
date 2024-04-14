@@ -21,6 +21,9 @@ const usePersistedState = create<State>()(
     {
       name: "user-input",
       storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({
+        state: state.state,
+      }),
     }
   )
 );
