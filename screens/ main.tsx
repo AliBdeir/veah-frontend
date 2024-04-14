@@ -1,17 +1,27 @@
-import { Button, ButtonText } from "@gluestack-ui/themed";
+import { Button, ButtonText, Input, InputField } from "@gluestack-ui/themed";
 import { useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View, ScrollView } from "react-native";
 import Profile from "../components/profile";
 import QuickOptions from "../components/quick-options";
 import usePersistedState from "../hooks/state";
 import profileCog from "../assets/cog.png";
 import cancel from "../assets/cancel.png";
+import useCall from "../hooks/use-call";
+import clsx from "clsx";
 
 export default function Main() {
   const [showProfile, setShowProfile] = useState(false);
+  const [otherText, setOtherText] = useState("");
   const newData = usePersistedState((state) => state.state);
+  const call = useCall();
+  const onSos = () => {
+    call.mutate({
+      ...newData,
+      emergencyInformation: otherText ? otherText : "No emergency information provided. General emergency.",
+    });
+  };
   return (
-    <View className="flex-1">
+    <ScrollView className="flex-1">
       {/* header */}
       <View className="flex flex-row justify-between items-center px-6">
         <Text className="text-white text-4xl font-bold">{showProfile ? "Profile" : ""}</Text>
@@ -30,10 +40,11 @@ export default function Main() {
             <View className="h-64 w-full justify-center items-center mt-3">
               {/* SOS button */}
               <TouchableOpacity
-                className="h-40 w-40 bg-red-500 rounded-full justify-center items-center"
-                onPress={() => {
-                  /* SOS button press handler */
-                }}
+                className={clsx(
+                  `h-40 w-40 rounded-full justify-center items-center`,
+                  call.isPending || call.isSuccess ? "bg-green-700" : "bg-red-500"
+                )}
+                onPress={onSos}
               >
                 <Text className="text-white text-4xl font-bold">SOS</Text>
               </TouchableOpacity>
@@ -45,12 +56,14 @@ export default function Main() {
             {/* Additional options container */}
             <View className="my-4 mx-3">
               <Text className="text-white mb-2">Other</Text>
-              <View className="border-2 border-white p-3">{/* Placeholder for additional options */}</View>
+              <Input>
+                <InputField placeholder="Type emergency..." value={otherText} onChangeText={(text) => setOtherText(text)} />
+              </Input>
             </View>
 
             {/* Call to action button container */}
             <View className="my-4 mx-3">
-              <Button className="bg-purple-600">
+              <Button className="bg-purple-600" onPress={onSos}>
                 {/* Replace with an actual ButtonIcon or ButtonSpinner if needed */}
                 <ButtonText className="text-white">MAKE THE CALL</ButtonText>
               </Button>
@@ -60,6 +73,6 @@ export default function Main() {
           <Profile />
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
